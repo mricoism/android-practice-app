@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
 //                        Intent(applicationContext, SecondActivity::class.java).also {
 //                            startActivity(it)
 //                        }
-                        
+                        /*
                         // Explicit Intent Launch YT
                         Intent(Intent.ACTION_MAIN).also {
                             it.`package` = "com.google.android.youtube"
@@ -51,8 +51,16 @@ class MainActivity : ComponentActivity() {
                             }
                         }
 
-
-
+                         */
+                        val intent = Intent(Intent.ACTION_SEND).apply {
+                            type = "text/plain"
+                            putExtra(Intent.EXTRA_EMAIL, arrayOf("mricoism@gmail.com"))
+                            putExtra(Intent.EXTRA_SUBJECT, "This is my subject")
+                            putExtra(Intent.EXTRA_TEXT, "Hi.. There!, let me introduce my self")
+                        }
+                        if (intent.resolveActivity(packageManager) != null) {
+                            startActivity(intent)
+                        }
                     }) {
                         Text(text = "Click Me!")
                     }

@@ -10,6 +10,7 @@ import com.example.intentsandintentfilters.ui.theme.IntentsAndIntentFiltersTheme
 class SecondActivity: ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // intent.getStringExtra() gamabaran bagaimana activity lain bisa menerima value Extra
         setContent {
             IntentsAndIntentFiltersTheme {
                 Text(text = "Second Activity")
