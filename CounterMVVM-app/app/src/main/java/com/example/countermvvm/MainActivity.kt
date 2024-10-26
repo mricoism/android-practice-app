@@ -36,6 +36,9 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+//import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.countermvvm.ui.theme.CounterMVVMTheme
 
 class MainActivity : ComponentActivity() {
@@ -43,6 +46,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            val viewModel: CounterViewModel = viewModel()
             CounterMVVMTheme {
 //                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 //
@@ -51,7 +55,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    TheCounterApp()
+                    TheCounterApp(viewModel)
                 }
             }
         }
@@ -59,8 +63,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun TheCounterApp() {
-    var count = remember { mutableStateOf(0) }
+fun TheCounterApp(viewModel: CounterViewModel) {
 
     val textStyle =
         TextStyle(fontFamily = FontFamily.Monospace, fontSize = 24.sp, color = Color(83, 100, 147))
@@ -71,30 +74,24 @@ fun TheCounterApp() {
         disabledContainerColor = Color.DarkGray
     )
 
-    fun increment() {
-        count.value++
-    }
 
-    fun decrement() {
-        count.value--
-    }
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("Count: ${count.value}", style = textStyle)
+        Text("Count: ${viewModel.count.value}", style = textStyle)
         Spacer(modifier = Modifier.height(16.dp))
         Row {
             IconButton(colors = buttonColor,
-                onClick = { decrement() }) {
+                onClick = { viewModel.decrement() }) {
                 Icon(
                     imageVector = Icons.Default.KeyboardArrowDown,
                     contentDescription = "Decrement"
                 )
             }
             Spacer(modifier = Modifier.width(16.dp))
-            IconButton(colors = buttonColor,onClick = { increment() }) {
+            IconButton(colors = buttonColor,onClick = { viewModel.increment() }) {
                 Icon(imageVector = Icons.Default.KeyboardArrowUp, contentDescription = "Increment")
             }
 
