@@ -70,6 +70,8 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose) // Compose viewModel
     implementation(libs.retrofit) // Newtork Calls
     implementation(libs.converter.gson) // JSON To Kotlin Object Mapping
-    implementation(libs.coil.compose) // Load Image
+//    implementation(libs.coil.compose) // Load Image
+    implementation(libs.coil3.coil.compose) // Load Image. using coil 3 bcs rememberAsyncImagePainter not found
+    implementation(libs.coil.network.okhttp) // why ? bcs https://github.com/coil-kt/coil/issues/1989
 
 }
