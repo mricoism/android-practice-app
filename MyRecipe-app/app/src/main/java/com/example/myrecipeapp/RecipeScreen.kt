@@ -2,6 +2,7 @@ package com.example.myrecipeapp
 
 import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
@@ -38,9 +39,9 @@ import coil3.util.DebugLogger
 
 
 @Composable
-fun RecipeScreen(modifier: Modifier = Modifier) {
+fun RecipeScreen(modifier: Modifier = Modifier, viewState: MainViewModel.RecipeState, navigateToDetail: (Category) -> Unit) {
     val recipeViewModel: MainViewModel = viewModel()
-    val viewState by recipeViewModel.categoriesState
+//    val viewState by recipeViewModel.categoriesState
 
     Box(modifier = modifier.fillMaxSize()) {
         when {
@@ -54,29 +55,31 @@ fun RecipeScreen(modifier: Modifier = Modifier) {
 
             else -> {
                 // Display categories
-                CategoryScreen(categories = viewState.list)
+                CategoryScreen(categories = viewState.list, navigateToDetail)
             }
         }
     }
 }
 
 @Composable
-fun CategoryScreen(categories: List<Category>) {
-    LazyVerticalGrid(columns = GridCells.Fixed(2), modifier = Modifier.fillMaxSize()) {
+fun CategoryScreen(categories: List<Category>, navigateToDetail: (Category) -> Unit) {
+    LazyVerticalGrid(columns = GridCells.Fixed(2), modifier = Modifier.fillMaxSize().padding(50.dp)) {
         items(categories) {
             category ->
-            CategoryItem(category = category)
+            CategoryItem(category = category, navigateToDetail)
         }
     }
 }
 
 @Composable
-fun CategoryItem(category: Category) {
+fun CategoryItem(category: Category, navigationToDetail: (Category) -> Unit) {
 
     Column(
         modifier = Modifier
             .padding(8.dp)
-            .fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally
+            .fillMaxSize().clickable {
+                navigationToDetail(category)
+            }, horizontalAlignment = Alignment.CenterHorizontally
     ) {
         //https://coil-kt.github.io/coil/compose/
         Log.d("hws a", "${category.strCategoryThumb}")

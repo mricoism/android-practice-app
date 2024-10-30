@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("kotlin-parcelize")
 }
 
 android {
@@ -73,5 +74,5 @@ dependencies {
 //    implementation(libs.coil.compose) // Load Image
     implementation(libs.coil3.coil.compose) // Load Image. using coil 3 bcs rememberAsyncImagePainter not found
     implementation(libs.coil.network.okhttp) // why ? bcs https://github.com/coil-kt/coil/issues/1989
-
+    implementation(libs.androidx.navigation.compose) // Using navigation
 }
