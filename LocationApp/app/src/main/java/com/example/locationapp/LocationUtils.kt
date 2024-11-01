@@ -1,4 +1,4 @@
-package com.example.locationapp.ui.theme
+package com.example.locationapp
 
 import android.content.Context
 import android.content.pm.PackageManager

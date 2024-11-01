@@ -1,4 +1,4 @@
-package com.example.locationapp.ui.theme
+package com.example.locationapp
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf

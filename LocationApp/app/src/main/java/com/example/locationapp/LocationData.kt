@@ -1,4 +1,4 @@
-package com.example.locationapp.ui.theme
+package com.example.locationapp
 
 data class LocationData(
     val latitude: Double,

@@ -59,6 +59,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.play.services.location)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -66,4 +67,24 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+//    implementation("com.google.android.gms:play-services-maps:19.0.0")
+//        implementation("com.google.maps.android:maps:compose")
+    implementation(libs.play.services.maps)
+//    implementation(libs.maps)
+
+        // Android Maps Compose composables for the Maps SDK for Android
+        implementation(libs.maps.compose)
+
+//    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.6")
+//    implementation("com.squareup.retrofit2:retrofit")
+//    implementation("com.squareup.retrofit2:converter-gson")
+    // Solve problem https://stackoverflow.com/a/67319926 | Error: Failed to resolve: retrofit
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+//    implementation("androidx.navigation:navigation-compose:2.8.3")
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+//    implementation(libs.retrofit2.retrofit)
+//    implementation(libs.retrofit2.converter.gson)
+    implementation(libs.androidx.navigation.compose)
 }

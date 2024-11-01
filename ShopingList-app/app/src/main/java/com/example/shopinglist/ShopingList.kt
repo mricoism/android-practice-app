@@ -1,5 +1,10 @@
 package com.example.shopinglist
 
+import android.Manifest
+import android.content.Context
+import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -20,6 +25,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
@@ -36,6 +42,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.core.app.ActivityCompat
+import androidx.navigation.NavController
 
 
 data class ShopingData(
@@ -43,14 +51,52 @@ data class ShopingData(
     var name: String,
     var quantity: Int,
     var isEditing: Boolean = false,
+    var address: String = ""
 )
 
 @Composable
-fun ShopingListApp() {
+fun ShopingListApp(
+    locationUtils: LocationUtils,
+    viewModel: LocationViewModel,
+    navController: NavController,
+    context: Context,
+    address: String
+) {
     var datas by remember { mutableStateOf(listOf<ShopingData>()) }
     var showDialog by remember { mutableStateOf(false) }
     var itemName by remember { mutableStateOf("") }
     var itemQuantity by remember { mutableStateOf("") }
+
+    val requestPermissionLauncher =
+        rememberLauncherForActivityResult(contract = ActivityResultContracts.RequestMultiplePermissions()) { permission ->
+            if (permission[Manifest.permission.ACCESS_COARSE_LOCATION] == true && permission[Manifest.permission.ACCESS_FINE_LOCATION] == true) {
+                // I have access to location
+                locationUtils.requestLocationUpdates(viewModel = viewModel)
+            } else {
+                // Ask For permission
+                val rationalRequired = ActivityCompat.shouldShowRequestPermissionRationale(
+                    context as MainActivity,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) || ActivityCompat.shouldShowRequestPermissionRationale(
+                    context,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                )
+
+                if (rationalRequired) {
+                    Toast.makeText(
+                        context,
+                        "Location is required for this feature to work",
+                        Toast.LENGTH_LONG
+                    ).show()
+                } else {
+                    Toast.makeText(
+                        context,
+                        "Location is required, PLEASE enable in android setting",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -80,6 +126,7 @@ fun ShopingListApp() {
                         editedItem?.let {
                             it.name = editedName
                             it.quantity = editedQuantity
+                            it.address = address
                         }
                     }
                 } else {
@@ -127,6 +174,21 @@ fun ShopingListApp() {
                         onValueChange = { value ->
                             itemQuantity = value
                         })
+                    Button(onClick = {
+                        if (locationUtils.hasLocationPermission(context)) {
+                            locationUtils.requestLocationUpdates(viewModel)
+                            navController.navigate("locationScreen") {
+                                this.launchSingleTop
+                            }
+                        } else {
+                            requestPermissionLauncher.launch(arrayOf(
+                                Manifest.permission.ACCESS_FINE_LOCATION,
+                                Manifest.permission.ACCESS_COARSE_LOCATION
+                            ))
+                        }
+                    }) {
+                        Text(text = "Address")
+                    }
                 }
             },
             confirmButton = {
@@ -141,7 +203,8 @@ fun ShopingListApp() {
                             val newItem = ShopingData(
                                 id = datas.size + 1,
                                 name = itemName,
-                                quantity = itemQuantity.toIntOrNull()?: 1
+                                quantity = itemQuantity.toIntOrNull()?: 1,
+                                address = address
                             )
                             datas += newItem
                             showDialog = false
@@ -175,8 +238,18 @@ fun ShopingListItem(
                 shape = RoundedCornerShape(20)
             )
     ) {
-        Text(text = item.name, modifier = Modifier.padding(8.dp))
-        Text(text = "Qyt: ${item.quantity}", modifier = Modifier.padding(8.dp))
+        Column(modifier = Modifier
+            .weight(1f)
+            .padding(8.dp)) {
+            Row {
+                Text(text = item.name, modifier = Modifier.padding(8.dp))
+                Text(text = "Qyt: ${item.quantity}", modifier = Modifier.padding(8.dp))
+            }
+            Row(modifier = Modifier.fillMaxWidth()) {
+                Icon(imageVector = Icons.Default.LocationOn, contentDescription = null)
+                Text(text = item.address)
+            }
+        }
         Row(modifier = Modifier.padding(8.dp)) {
             IconButton(onClick = onEditClick) {
                 Icon(imageVector = Icons.Default.Edit, contentDescription = null)
