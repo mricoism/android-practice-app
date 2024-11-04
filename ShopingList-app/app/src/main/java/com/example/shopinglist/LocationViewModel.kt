@@ -29,7 +29,7 @@ class LocationViewModel: ViewModel() {
                 Log.d("hws b", "4 | ${latLng}")
                 val result = RetrofitClient.create().getAddressFromCoordinates(
                     latlng = latLng,
-                    apiKey = "AIzaSyCx-Rf6jxXgfZabGsRRLwdRW0OSciI_UDw"
+                    apiKey = "AIzaSyCOebIA0C3nOluWSseMeNeaewW4khiPGdU"
                 )
                 Log.d("hws b", "5 ${result.status} | ")
                 _address.value = result.results
