@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.mricoism.encryptdecryptapp"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.mricoism.encryptdecryptapp"

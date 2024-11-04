@@ -4,8 +4,11 @@ import android.os.Build
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
 import androidx.annotation.RequiresApi
+import java.io.InputStream
+import java.io.OutputStream
 import java.security.KeyStore
 import javax.crypto.Cipher
+import javax.crypto.CipherOutputStream
 import javax.crypto.KeyGenerator
 import javax.crypto.SecretKey
 import javax.crypto.spec.IvParameterSpec
@@ -19,7 +22,7 @@ class CryptoManager {
         init(Cipher.ENCRYPT_MODE, getKey())
     }
 
-    private fun getDecryptCipherForIv(ivL: ByteArray): Cipher {
+    private fun getDecryptCipherForIv(iv: ByteArray): Cipher {
         return Cipher.getInstance(TRANSFORMATION).apply {
             init(Cipher.DECRYPT_MODE, getKey(), IvParameterSpec(iv))
         }
@@ -43,6 +46,31 @@ class CryptoManager {
                 .build()
             )
         }.generateKey()
+    }
+
+    fun encrypt(bytes: ByteArray, outputStream: OutputStream): ByteArray {
+        val encryptBytes = encryptCipher.doFinal(bytes)
+        outputStream.use {
+            it.write(encryptCipher.iv.size)
+            it.write(encryptCipher.iv)
+            it.write(encryptBytes.size)
+            it.write(encryptBytes)
+        }
+        return encryptBytes
+    }
+
+    fun decrypt(inputStream: InputStream): ByteArray {
+        return inputStream.use {
+            val ivSize = it.read()
+            val iv = ByteArray(ivSize)
+            it.read(iv)
+
+            val encryptedBytesSize = it.read()
+            val encryptedBytes = ByteArray(encryptedBytesSize)
+            it.read(encryptedBytes)
+
+            getDecryptCipherForIv(iv).doFinal(encryptedBytes)
+        }
     }
 
     companion object {
