@@ -33,6 +33,14 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        viewBinding = true
+    }
+}
+configurations.all {
+    resolutionStrategy {
+        force("androidx.core:core-ktx:1.10.1")
+    }
 }
 
 dependencies {
