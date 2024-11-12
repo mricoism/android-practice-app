@@ -2,15 +2,19 @@ package com.mricoism.firebasefirestoreapp
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 import com.mricoism.firebasefirestoreapp.databinding.ActivityMainBinding
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 import kotlin.system.measureTimeMillis
 
 
@@ -26,5 +30,27 @@ class MainActivity: AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.btnUploadData.setOnClickListener {
+            val firstName = binding.etFirstName.text.toString()
+            val lastName = binding.etLastName.text.toString()
+            val age = binding.etAge.text.toString().toInt()
+
+            val person = Person(firstName, lastName, age)
+            savePerson(person)
+        }
+    }
+
+    private fun savePerson(person: Person) = CoroutineScope(Dispatchers.IO).launch {
+        try {
+            personCollectionRef.add(person).await()
+            withContext(Dispatchers.Main) {
+                Toast.makeText(this@MainActivity, "Successfully saved data.", Toast.LENGTH_LONG).show()
+            }
+        } catch (e: Exception) {
+            withContext(Dispatchers.Main) {
+                Toast.makeText(this@MainActivity, e.message, Toast.LENGTH_LONG).show()
+            }
+        }
     }
 }
