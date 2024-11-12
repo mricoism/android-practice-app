@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "121086110118",
+    "project_id": "fir-firestoreapp-60f1f",
+    "storage_bucket": "fir-firestoreapp-60f1f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:121086110118:android:39a2f9b7edcb793e2ac767",
+        "android_client_info": {
+          "package_name": "com.mricoism.firebasefirestoreapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAB_jrS0sraoYnvKliOACr7XSo4FHmhKE4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
