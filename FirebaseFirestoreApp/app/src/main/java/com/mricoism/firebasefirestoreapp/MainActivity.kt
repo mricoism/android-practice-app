@@ -5,6 +5,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Firebase
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.toObject
 import com.mricoism.firebasefirestoreapp.databinding.ActivityMainBinding
@@ -33,11 +34,7 @@ class MainActivity: AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnUploadData.setOnClickListener {
-            val firstName = binding.etFirstName.text.toString()
-            val lastName = binding.etLastName.text.toString()
-            val age = binding.etAge.text.toString().toInt()
-
-            val person = Person(firstName, lastName, age)
+            val person = getOldPerson()
             savePerson(person)
         }
 
@@ -48,6 +45,66 @@ class MainActivity: AppCompatActivity() {
             retrivePersons()
         }
 
+        binding.btnUpdatePerson.setOnClickListener {
+            val oldPerson = getOldPerson()
+            val newPersonMap = getNewPersonMap()
+            updatePerson(oldPerson, newPersonMap)
+        }
+
+    }
+
+    private fun getOldPerson():Person {
+        val firstName = binding.etFirstName.text.toString()
+        val lastName = binding.etLastName.text.toString()
+        val age = binding.etAge.text.toString().toInt()
+
+        return Person(firstName, lastName, age)
+    }
+
+    private fun getNewPersonMap(): Map<String, Any> {
+        val firstName = binding.etNewFirstName.text.toString()
+        val lastName = binding.etNewLastName.text.toString()
+        val age = binding.etNewAge.text.toString()
+        val map = mutableMapOf<String, Any>()
+        if (firstName.isNotEmpty()) {
+            map["firstName"] = firstName
+        }
+        if (lastName.isNotEmpty()) {
+            map["lastName"] = lastName
+        }
+        if (age.isNotEmpty()) {
+            map["age"] = age.toInt()
+        }
+        return map
+    }
+
+    private fun updatePerson(person: Person, newPersonMap: Map<String, Any>) = CoroutineScope(Dispatchers.IO).launch {
+        val personQuery = personCollectionRef
+            .whereEqualTo("firstName", person.firstName)
+            .whereEqualTo("lastName", person.lastName)
+            .whereEqualTo("age", person.age)
+            .get()
+            .await()
+
+        if (personQuery.documents.isNotEmpty()) {
+            for (document in personQuery.documents) {
+                try {
+//                    personCollectionRef.document(document.id).update("firstName", person.firstName) // If you want only update one field
+                    personCollectionRef.document(document.id).set(
+                        newPersonMap,
+                        SetOptions.merge()
+                    ).await()
+                } catch (e: Exception) {
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(this@MainActivity, e.message, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        } else {
+            withContext(Dispatchers.Main) {
+                Toast.makeText(this@MainActivity, "No person Match the query!", Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     private fun subscribeToRealtimeUpdates() {
