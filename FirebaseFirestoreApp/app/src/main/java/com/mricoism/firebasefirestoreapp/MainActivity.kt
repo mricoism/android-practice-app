@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
+import com.google.firebase.firestore.toObject
 import com.mricoism.firebasefirestoreapp.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -38,6 +39,52 @@ class MainActivity: AppCompatActivity() {
 
             val person = Person(firstName, lastName, age)
             savePerson(person)
+        }
+
+        subscribeToRealtimeUpdates()
+
+        /*
+        binding.btnRetrieveData.setOnClickListener {
+            retrivePersons()
+        }
+         */
+    }
+
+    private fun subscribeToRealtimeUpdates() {
+        personCollectionRef.addSnapshotListener {
+            querySnapshot, firebaseFirestoreException ->
+            firebaseFirestoreException?.let {
+                Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                return@addSnapshotListener
+            }
+            querySnapshot?.let {
+                val sb = StringBuilder()
+                for (document in it.documents) {
+                    val person = document.toObject<Person>()
+                    sb.append("$person\n")
+                }
+                binding.tvPersons.text = sb.toString()
+            }
+        }
+    }
+
+    private fun retrivePersons() = CoroutineScope(Dispatchers.IO).launch {
+        try {
+            val querySnapshot = personCollectionRef.get().await()
+            val sb = StringBuilder()
+            for (document in querySnapshot.documents) {
+//                val person = document.toObject(Person::class.java) // old ways without ktx
+                val person = document.toObject<Person>()
+                sb.append("$person\n")
+
+            }
+            withContext(Dispatchers.Main) {
+                binding.tvPersons.text = sb.toString()
+            }
+        } catch (e: Exception) {
+            withContext(Dispatchers.Main) {
+                Toast.makeText(this@MainActivity, e.message, Toast.LENGTH_LONG).show()
+            }
         }
     }
 
