@@ -43,14 +43,15 @@ class MainActivity: AppCompatActivity() {
 
         subscribeToRealtimeUpdates()
 
-        /*
+
         binding.btnRetrieveData.setOnClickListener {
             retrivePersons()
         }
-         */
+
     }
 
     private fun subscribeToRealtimeUpdates() {
+        // we can also give query .whereEqualTo() before .addSnapshotListener below
         personCollectionRef.addSnapshotListener {
             querySnapshot, firebaseFirestoreException ->
             firebaseFirestoreException?.let {
@@ -69,8 +70,18 @@ class MainActivity: AppCompatActivity() {
     }
 
     private fun retrivePersons() = CoroutineScope(Dispatchers.IO).launch {
+        val fromAge = binding.etFrom.text.toString().toInt()
+        val toAge = binding.etTo.text.toString().toInt()
+
         try {
-            val querySnapshot = personCollectionRef.get().await()
+//            val querySnapshot = personCollectionRef.get().await()
+
+            val querySnapshot = personCollectionRef
+                .whereGreaterThan("age", fromAge)
+                .whereLessThan("age", toAge)
+                .orderBy("age")
+                .get()
+                .await()
             val sb = StringBuilder()
             for (document in querySnapshot.documents) {
 //                val person = document.toObject(Person::class.java) // old ways without ktx
