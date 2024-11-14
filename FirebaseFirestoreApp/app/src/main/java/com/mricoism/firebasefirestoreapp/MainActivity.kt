@@ -5,6 +5,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Firebase
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.toObject
@@ -50,6 +51,10 @@ class MainActivity: AppCompatActivity() {
             val newPersonMap = getNewPersonMap()
             updatePerson(oldPerson, newPersonMap)
         }
+        binding.btnDeletePerson.setOnClickListener {
+            val person = getOldPerson()
+            deletePerson(person)
+        }
 
     }
 
@@ -76,6 +81,35 @@ class MainActivity: AppCompatActivity() {
             map["age"] = age.toInt()
         }
         return map
+    }
+
+    private fun deletePerson(person: Person) = CoroutineScope(Dispatchers.IO).launch {
+        val personQuery = personCollectionRef
+            .whereEqualTo("firstName", person.firstName)
+            .whereEqualTo("lastName", person.lastName)
+            .whereEqualTo("age", person.age)
+            .get()
+            .await()
+
+        if (personQuery.documents.isNotEmpty()) {
+            for (document in personQuery.documents) {
+                try {
+                    personCollectionRef.document(document.id).delete().await()
+
+//                    personCollectionRef.document(document.id).update(
+//                        mapOf("firstName" to FieldValue.delete())
+//                    ).await()
+                } catch (e: Exception) {
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(this@MainActivity, e.message, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        } else {
+            withContext(Dispatchers.Main) {
+                Toast.makeText(this@MainActivity, "No person Match the query!", Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     private fun updatePerson(person: Person, newPersonMap: Map<String, Any>) = CoroutineScope(Dispatchers.IO).launch {
