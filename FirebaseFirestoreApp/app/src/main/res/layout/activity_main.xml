@@ -114,10 +114,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Do Batch Write"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintEnd_toStartOf="@id/btnDoTransaction"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnRetrieveData" />
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -185,5 +186,16 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnRetrieveData"
         app:layout_constraintTop_toBottomOf="@+id/btnUpdatePerson" />
+
+    <Button
+        android:id="@+id/btnDoTransaction"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Do Transcation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@id/btnBatchWrite"
+        app:layout_constraintTop_toBottomOf="@+id/btnDeletePerson" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
