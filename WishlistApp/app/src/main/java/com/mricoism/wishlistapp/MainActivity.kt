@@ -29,10 +29,12 @@ class MainActivity : ComponentActivity() {
 //                    )
 //                }
                 Surface(
-                    modifier = Modifier.fillMaxSize().statusBarsPadding(),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .statusBarsPadding(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    HomeView()
+                    Navigation()
                 }
             }
         }

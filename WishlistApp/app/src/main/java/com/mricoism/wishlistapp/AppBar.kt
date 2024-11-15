@@ -23,15 +23,21 @@ fun AppBarView(
     onBackNavClicked: () -> Unit = {},
 ) {
 
-    val navigationIcon: (@Composable () -> Unit)? = {
-        IconButton(onClick = { onBackNavClicked() }) {
-            Icon(
-                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                tint = Color.White,
-                contentDescription = null
-            )
+    val navigationIcon: (@Composable () -> Unit)? =
+        if (!title.contains("WishlistApp")) {
+            {
+                IconButton(onClick = { onBackNavClicked() }) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                        tint = Color.White,
+                        contentDescription = null
+                    )
+                }
+            }
+        } else {
+            null
         }
-    }
+
     TopAppBar(
         title = {
             // R.color.white | R is stand for resource folder
@@ -46,5 +52,5 @@ fun AppBarView(
         elevation = 3.dp,
         backgroundColor = colorResource(id = R.color.primary),
         navigationIcon = navigationIcon
-        )
+    )
 }
