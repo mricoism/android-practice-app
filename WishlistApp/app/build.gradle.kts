@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.mricoism.wishlistapp"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.mricoism.wishlistapp"
