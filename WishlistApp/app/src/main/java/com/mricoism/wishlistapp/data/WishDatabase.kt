@@ -9,5 +9,5 @@ import androidx.room.RoomDatabase
     exportSchema = false
 )
 abstract class WishDatabase: RoomDatabase() {
-//    abstract fun dao
+    abstract fun wishDao(): WishDao
 }
