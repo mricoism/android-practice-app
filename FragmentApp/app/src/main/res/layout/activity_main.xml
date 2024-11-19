@@ -46,10 +46,20 @@ because we set it statically.
 
 if we want to have such container in which we are able to replace fragments dynamically at runtime.
 We can't do like code above or can't use <Fragment> Tag.
-Instead we need to replace that <Fragment> Tag with <FrameLayoutTag>
+Instead we need to replace that <Fragment> Tag with <FrameLayout> Tag.
+FrameLayout basically just a layout type that is designed to block out an area on the screen to display a single item.
+
+
 -->
+
+<!--
+So this will just display a single fragment box that we don't see here because this frame layout is just used as container for that fragment.
+And we will add that fragment tag at runtime.
+So you can think of this just as a very simple layout that is use to hold our fragments.
+
+ -->
     <FrameLayout
-        android:id="@+id/FL"
+        android:id="@+id/flFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
