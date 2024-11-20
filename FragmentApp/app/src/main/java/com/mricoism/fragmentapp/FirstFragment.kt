@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import com.mricoism.fragmentapp.databinding.ActivityMainBinding
 import com.mricoism.fragmentapp.databinding.FragmentFirstBinding
 
+
+// maybe you need to see this https://stackoverflow.com/questions/34706399/how-to-use-data-binding-with-fragment
 /*
 class FirstFragment : Fragment() {
 
