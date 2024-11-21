@@ -1,6 +1,7 @@
 package com.mricoism.activitiesapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -14,11 +15,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.mricoism.activitiesapp.ui.theme.ActivitiesAppTheme
 
 /*
+This MainActivity will just serve as the entry point for our application, so if another component.
 
+Documentation:
+https://developer.android.com/guide/components/activities/activity-lifecycle
  */
 class MainActivity : ComponentActivity() {
+    val TAG = "lifecycleRIKO"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d(TAG, "onCreate()")
         enableEdgeToEdge()
         setContent {
             ActivitiesAppTheme {
@@ -31,6 +38,36 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "onStart()")
+    }
+
+    override fun onPause() {
+        super.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "onResume()")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "onStop()")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d(TAG, "onRestart()")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "onDestroy()")
+    }
+
 }
 
 @Composable
