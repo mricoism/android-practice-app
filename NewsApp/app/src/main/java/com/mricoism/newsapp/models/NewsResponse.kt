@@ -1,4 +1,4 @@
-package com.mricoism.newsapp
+package com.mricoism.newsapp.models
 
 data class NewsResponse(
     val articles: List<Article>,

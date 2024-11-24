@@ -7,7 +7,11 @@
     <fragment
         android:id="@+id/articleFragment"
         android:name="com.mricoism.newsapp.ui.fragments.ArticleFragment"
-        android:label="ArticleFragment" />
+        android:label="ArticleFragment" >
+        <argument
+            android:name="article"
+            app:argType="com.mricoism.newsapp.models.Article"/>
+    </fragment>
     <fragment
         android:id="@+id/favouritesFragment2"
         android:name="com.mricoism.newsapp.ui.fragments.FavouritesFragment"
