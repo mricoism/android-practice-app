@@ -19,7 +19,7 @@ class NewsActivity : AppCompatActivity() {
     lateinit var binding: ActivityNewsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+//        enableEdgeToEdge()
 
         binding = ActivityNewsBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -46,6 +46,6 @@ class NewsActivity : AppCompatActivity() {
 //            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
 //            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
 //            insets
-        }
+//        }
     }
 }

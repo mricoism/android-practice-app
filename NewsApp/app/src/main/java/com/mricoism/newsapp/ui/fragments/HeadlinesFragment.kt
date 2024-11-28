@@ -2,17 +2,14 @@ package com.mricoism.newsapp.ui.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.text.Editable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.AbsListView
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
-import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,42 +17,37 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mricoism.newsapp.R
 import com.mricoism.newsapp.adapters.NewsAdapter
 import com.mricoism.newsapp.databinding.FragmentHeadlineBinding
-import com.mricoism.newsapp.databinding.FragmentSearchBinding
 import com.mricoism.newsapp.ui.NewsActivity
 import com.mricoism.newsapp.ui.NewsViewModel
 import com.mricoism.newsapp.util.Constants
-import com.mricoism.newsapp.util.Constants.Companion.SEARCH_NEWS_TIME_DELAY
 import com.mricoism.newsapp.util.Resource
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 // Default when created file
-//class SearchFragment : Fragment() {
+//class HeadlineFragment : Fragment() {
 //    override fun onCreateView(
 //        inflater: LayoutInflater, container: ViewGroup?,
 //        savedInstanceState: Bundle?
 //    ): View? {
 //        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_search, container, false)
+//        return inflater.inflate(R.layout.fragment_headline, container, false)
 //    }
 //}
 
-class SearchFragment : Fragment(R.layout.fragment_search) {
+class HeadlinesFragment : Fragment(R.layout.fragment_headline) {
+
     lateinit var newsViewModel: NewsViewModel
     lateinit var newsAdapter: NewsAdapter
     lateinit var retryButton: Button
     lateinit var errorText: TextView
-    lateinit var itemSearchError: CardView
-    lateinit var binding: FragmentSearchBinding
+    lateinit var itemHeadlinesError: CardView
+    lateinit var binding: FragmentHeadlineBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentSearchBinding.bind(view)
 
+        binding = FragmentHeadlineBinding.bind(view)
 
-        itemSearchError = view.findViewById(R.id.itemSearchError)
+        itemHeadlinesError = view.findViewById(R.id.itemHeadlinesError)
 
         val inflater = requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view: View = inflater.inflate(R.layout.item_error, null)
@@ -64,41 +56,28 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         errorText = view.findViewById(R.id.errorText)
 
         newsViewModel = (activity as NewsActivity).newsViewModel
-        setupSearchRecycler()
+        setupHeadlineRecycler()
 
         newsAdapter.setOnItemClickListener {
             val bundle = Bundle().apply {
                 putSerializable("article", it)
             }
-            findNavController().navigate(R.id.action_searchFragment4_to_articleFragment, bundle)
+            findNavController().navigate(R.id.action_headlineFragment2_to_articleFragment, bundle)
         }
 
-        var job: Job? = null
-        binding.searchEdit.addTextChangedListener() { editable ->
-            job?.cancel()
-            job = MainScope().launch {
-                delay(SEARCH_NEWS_TIME_DELAY)
-                editable?.let {
-                    if(editable.toString().isNotEmpty()) {
-                        newsViewModel.searchNews(editable.toString())
-                    }
-                }
-            }
-        }
-
-        newsViewModel.searchNews.observe(viewLifecycleOwner, Observer {
-                response ->
+        newsViewModel.headlines.observe(viewLifecycleOwner, Observer {
+            response ->
             when(response) {
                 is Resource.Success<*> -> {
                     hideProgressBar()
                     hideErrorMessage()
                     response.data?.let {
-                            newsResponse ->
+                        newsResponse ->
                         newsAdapter.differ.submitList(newsResponse.articles.toList())
                         val totalPages = newsResponse.totalResults / Constants.QUERY_PAGE_SIZE + 2
-                        isLastPage = newsViewModel.searchNewsPage == totalPages
+                        isLastPage = newsViewModel.headlinesPage == totalPages
                         if (isLastPage) {
-                            binding.recyclerSearch.setPadding(0,0,0,0)
+                            binding.recyclerHeadlines.setPadding(0,0,0,0)
 
                         }
                     }
@@ -106,7 +85,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 is Resource.Error<*> -> {
                     hideProgressBar()
                     response.message?.let {
-                            message ->
+                        message ->
                         Toast.makeText(activity, "Sorry Error: $message", Toast.LENGTH_LONG).show()
                         showErrorMessage(message)
                     }
@@ -118,14 +97,12 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         })
 
         retryButton.setOnClickListener {
-            if (binding.searchEdit.text.toString().isNotEmpty()) {
-                newsViewModel.searchNews(binding.searchEdit.text.toString())
-            } else {
-                hideErrorMessage()
-            }
+            newsViewModel.getHeadlines("us")
         }
 
+
     }
+
 
     var isError = false
     var isLoading = false
@@ -143,12 +120,12 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     }
 
     private fun hideErrorMessage() {
-        itemSearchError.visibility = View.INVISIBLE
+        itemHeadlinesError.visibility = View.INVISIBLE
         isError = false
     }
 
     private fun showErrorMessage(message: String) {
-        itemSearchError.visibility = View.VISIBLE
+        itemHeadlinesError.visibility = View.VISIBLE
         errorText.text = message
         isError = true
     }
@@ -170,7 +147,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             val shouldPaginate =
                 isNoError && isNotLoadingAndNotLastPage && isLastItem && isNotBeginning && isTotalMoreThanVisible && isScrolling
             if (shouldPaginate) {
-                newsViewModel.searchNews(binding.searchEdit.text.toString())
+                newsViewModel.getHeadlines("us")
                 isScrolling = false
             }
 
@@ -184,12 +161,12 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         }
     }
 
-    private fun setupSearchRecycler() {
+    private fun setupHeadlineRecycler() {
         newsAdapter = NewsAdapter()
-        binding.recyclerSearch.apply {
+        binding.recyclerHeadlines.apply {
             adapter = newsAdapter
             layoutManager = LinearLayoutManager(activity)
-            addOnScrollListener(this@SearchFragment.scrollListener)
+            addOnScrollListener(this@HeadlinesFragment.scrollListener)
         }
     }
 }

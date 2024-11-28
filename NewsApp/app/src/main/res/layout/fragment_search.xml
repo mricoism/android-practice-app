@@ -30,7 +30,7 @@
         android:padding="8dp"
         android:textSize="14sp"
         android:fontFamily="@font/poppins"
-        android:drawableTint="@color/purple"
+        android:drawableTint="@color/primary"
         android:background="@drawable/search_border"
         android:drawableEnd="@drawable/baseline_search_24"
         app:layout_constraintEnd_toEndOf="parent"

@@ -12,7 +12,7 @@
         android:text="Headlines."
         android:textSize="30sp"
         android:fontFamily="@font/poppins"
-        android:textColor="@color/purple"
+        android:textColor="@color/primary"
         android:textStyle="bold"
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
