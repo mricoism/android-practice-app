@@ -2,6 +2,7 @@ package com.mricoism.newsapp.ui.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -59,10 +60,11 @@ class HeadlinesFragment : Fragment(R.layout.fragment_headline) {
         setupHeadlineRecycler()
 
         newsAdapter.setOnItemClickListener {
+            Log.d("HWS", "HeadlinesFragment | newsAdapter.setOnItemClickListener")
             val bundle = Bundle().apply {
                 putSerializable("article", it)
             }
-            findNavController().navigate(R.id.action_headlineFragment2_to_articleFragment, bundle)
+            findNavController().navigate(R.id.action_headlinesFragment_to_articleFragment, bundle)
         }
 
         newsViewModel.headlines.observe(viewLifecycleOwner, Observer {

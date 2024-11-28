@@ -17,7 +17,7 @@
         android:name="com.mricoism.newsapp.ui.fragments.FavouritesFragment"
         android:label="FavouritesFragment" >
         <action
-            android:id="@+id/action_favouritesFragment2_to_articleFragment"
+            android:id="@+id/action_favouritesFragment_to_articleFragment"
             app:destination="@id/articleFragment" />
     </fragment>
     <fragment
@@ -25,15 +25,15 @@
         android:name="com.mricoism.newsapp.ui.fragments.SearchFragment"
         android:label="SearchFragment" >
         <action
-            android:id="@+id/action_searchFragment4_to_articleFragment"
+            android:id="@+id/action_searchFragment_to_articleFragment"
             app:destination="@id/articleFragment" />
     </fragment>
     <fragment
         android:id="@+id/headlinesFragment"
         android:name="com.mricoism.newsapp.ui.fragments.HeadlinesFragment"
-        android:label="HeadlineFragment" >
+        android:label="HeadlinesFragment" >
         <action
-            android:id="@+id/action_headlineFragment2_to_articleFragment"
+            android:id="@+id/action_headlinesFragment_to_articleFragment"
             app:destination="@id/articleFragment" />
     </fragment>
 </navigation>
