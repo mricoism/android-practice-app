@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mricoism.newsapp.R
 import com.mricoism.newsapp.adapters.NewsAdapter
-import com.mricoism.newsapp.databinding.FragmentHeadlineBinding
+import com.mricoism.newsapp.databinding.FragmentHeadlinesBinding
 import com.mricoism.newsapp.ui.NewsActivity
 import com.mricoism.newsapp.ui.NewsViewModel
 import com.mricoism.newsapp.util.Constants
@@ -34,19 +34,19 @@ import com.mricoism.newsapp.util.Resource
 //    }
 //}
 
-class HeadlinesFragment : Fragment(R.layout.fragment_headline) {
+class HeadlinesFragment : Fragment(R.layout.fragment_headlines) {
 
     lateinit var newsViewModel: NewsViewModel
     lateinit var newsAdapter: NewsAdapter
     lateinit var retryButton: Button
     lateinit var errorText: TextView
     lateinit var itemHeadlinesError: CardView
-    lateinit var binding: FragmentHeadlineBinding
+    lateinit var binding: FragmentHeadlinesBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding = FragmentHeadlineBinding.bind(view)
+        binding = FragmentHeadlinesBinding.bind(view)
 
         itemHeadlinesError = view.findViewById(R.id.itemHeadlinesError)
 

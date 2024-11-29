@@ -1,5 +1,6 @@
 package com.mricoism.newsapp.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -63,13 +64,17 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
             articleDateTime.text = article.publishedAt
 
             setOnClickListener {
+                Log.d("HWS", "NewsAdapter | setOnClickListener 1")
                 onItemClickListener?.let {
+                    Log.d("HWS", "NewsAdapter | setOnClickListener -> onItemClickListener")
                     it(article)
                 }
+                Log.d("HWS", "NewsAdapter | setOnClickListener 2")
             }
         }
     }
     fun setOnItemClickListener(listener: (Article) -> Unit ) {
-        onItemClickListener
+        Log.d("HWS", "NewsAdapter | setOnItemClickListener")
+        onItemClickListener = listener
     }
 }

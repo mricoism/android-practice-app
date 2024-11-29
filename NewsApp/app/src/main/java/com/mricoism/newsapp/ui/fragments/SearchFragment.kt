@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mricoism.newsapp.R
 import com.mricoism.newsapp.adapters.NewsAdapter
-import com.mricoism.newsapp.databinding.FragmentHeadlineBinding
 import com.mricoism.newsapp.databinding.FragmentSearchBinding
 import com.mricoism.newsapp.ui.NewsActivity
 import com.mricoism.newsapp.ui.NewsViewModel
