@@ -19,6 +19,8 @@ class MainActivity : AppCompatActivity() {
 
         binding.Button.setOnClickListener {
             Log.d("HWS", "ON CLICK BUTTON")
+
+            // AppShellConfig
             startActivity(
                 FlutterActivity
                     .withNewEngine()
