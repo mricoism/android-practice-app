@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.mricoism.shellappexample"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.mricoism.shellappexample"
@@ -25,6 +25,12 @@ android {
                 "proguard-rules.pro"
             )
         }
+        debug {
+
+        }
+        create("profile") {
+            initWith(getByName("debug"))
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -32,6 +38,14 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+    buildFeatures {
+        viewBinding = true
+    }
+}
+
+configurations {
+    getByName("profileImplementation") {
     }
 }
 
@@ -45,4 +59,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    debugImplementation("com.example.flutter_module:flutter_debug:1.0")
+    releaseImplementation("com.example.flutter_module:flutter_release:1.0")
+    add("profileImplementation", "com.example.flutter_module:flutter_profile:1.0")
 }
