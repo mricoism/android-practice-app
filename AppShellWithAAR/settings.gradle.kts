@@ -19,6 +19,7 @@ dependencyResolutionManagement {
 
         //AppShellConfig
         maven(url = "https://storage.googleapis.com/download.flutter.io")
+//        maven(url = "../libs")
         maven(url = "/Users/code.id/Documents/learn/android/practice-apps/AppShellWithAAR/app/libs")
     }
 }
