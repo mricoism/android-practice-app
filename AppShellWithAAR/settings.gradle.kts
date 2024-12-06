@@ -11,15 +11,18 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
 
+
         //AppShellConfig
         maven(url = "https://storage.googleapis.com/download.flutter.io")
-        maven(url = "/Users/code.id/Documents/learn/android/practice-apps/AppShellWithAAR/app/libs")
+        maven(url = settingsDir.parentFile.toString() + "/AppShellWithAAR/app/libs")
+//        maven(url = "/Users/code.id/Documents/learn/android/practice-apps/AppShellWithAAR/app/libs")
     }
 }
 
