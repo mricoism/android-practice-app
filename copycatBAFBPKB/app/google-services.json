@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "880079592604",
+    "project_id": "copycatbafbpkb",
+    "storage_bucket": "copycatbafbpkb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:880079592604:android:6dacd9e075076631906159",
+        "android_client_info": {
+          "package_name": "com.mricoism.copycatbafbpkb"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAU6OklhL8hAJZ-EikKn_iQvhLpWDrH5Yg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
