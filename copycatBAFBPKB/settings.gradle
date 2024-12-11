@@ -16,15 +16,8 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-
-        maven {
-            url = '/Users/code.id/Documents/learn/android/practice-apps/AppShellWithAAR/app/libs'
-        }
-        maven {
-            url = 'https://storage.googleapis.com/download.flutter.io'
-        }
     }
 }
 
-rootProject.name = "AppShellWithAARGroovyDSL"
+rootProject.name = "copycatBAFBPKB"
 include ':app'
