@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         binding.button.text = "Trigger crash!"
         binding.button.setOnClickListener {
             Log.d("HWS", "setOnClickListener")
-            throw RuntimeException("Test Crash RIKO")
+//            throw RuntimeException("Test Crash RIKO")
         }
     }
 }
