@@ -18,7 +18,8 @@ dependencyResolutionManagement {
         mavenCentral()
 
         maven {
-            url = '/Users/code.id/Documents/learn/android/practice-apps/AppShellWithAAR/app/libs'
+//            url = '/Users/code.id/Documents/learn/android/practice-apps/AppShellWithAARGroovyDSL/app/libs'
+            url = settingsDir.parentFile.toString() + '/AppShellWithAARGroovyDSL/app/libs'
         }
         maven {
             url = 'https://storage.googleapis.com/download.flutter.io'

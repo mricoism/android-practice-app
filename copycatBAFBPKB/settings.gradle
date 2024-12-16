@@ -16,6 +16,12 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url = settingsDir.parentFile.toString() + '/copycatBAFBPKB/app/libs'
+        }
+        maven {
+            url = 'https://storage.googleapis.com/download.flutter.io'
+        }
     }
 }
 
