@@ -1,0 +1,105 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.flutter.plugins.firebase.crashlytics",
+    "module": "firebase_crashlytics_release",
+    "version": "1.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.5"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.flutter",
+          "module": "flutter_embedding_release",
+          "version": {
+            "requires": "1.0.0-235db911ba279722f5e685f38b0ed30fa7e8570a"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "firebase_crashlytics_release-1.0.aar",
+          "url": "firebase_crashlytics_release-1.0.aar",
+          "size": 17645,
+          "sha512": "447c02b4be3ce5891f0c1e2d16026d4b67cec0fce5c3e4e5b302db29da746866b719c9bb1c108387ac86bef6285dd95c1ad21bf15ac7af891a4c2e8ab86160c6",
+          "sha256": "d9081aa64b5f9dcedac42927b08bad31e12e5ab558569fc756dbb46267f32623",
+          "sha1": "c20824fa3f519290a9a4cefca19494318dd4dbbb",
+          "md5": "a69102884f130908fcb65c673cc812f0"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "io.flutter",
+          "module": "flutter_embedding_release",
+          "version": {
+            "requires": "1.0.0-235db911ba279722f5e685f38b0ed30fa7e8570a"
+          }
+        },
+        {
+          "group": "com.google.firebase",
+          "module": "firebase-bom",
+          "version": {
+            "requires": "33.5.1"
+          },
+          "attributes": {
+            "org.gradle.category": "platform"
+          },
+          "endorseStrictVersions": true
+        },
+        {
+          "group": "com.google.firebase",
+          "module": "firebase-crashlytics"
+        },
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.7.0"
+          }
+        },
+        {
+          "group": "io.flutter.plugins.firebase.core",
+          "module": "firebase_core_release",
+          "version": {
+            "requires": "1.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "firebase_crashlytics_release-1.0.aar",
+          "url": "firebase_crashlytics_release-1.0.aar",
+          "size": 17645,
+          "sha512": "447c02b4be3ce5891f0c1e2d16026d4b67cec0fce5c3e4e5b302db29da746866b719c9bb1c108387ac86bef6285dd95c1ad21bf15ac7af891a4c2e8ab86160c6",
+          "sha256": "d9081aa64b5f9dcedac42927b08bad31e12e5ab558569fc756dbb46267f32623",
+          "sha1": "c20824fa3f519290a9a4cefca19494318dd4dbbb",
+          "md5": "a69102884f130908fcb65c673cc812f0"
+        }
+      ]
+    }
+  ]
+}

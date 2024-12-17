@@ -50,17 +50,38 @@
           "version": {
             "requires": "1.0.0-235db911ba279722f5e685f38b0ed30fa7e8570a"
           }
+        },
+        {
+          "group": "io.flutter.plugins.firebase.analytics",
+          "module": "firebase_analytics_release",
+          "version": {
+            "requires": "1.0"
+          }
+        },
+        {
+          "group": "io.flutter.plugins.firebase.core",
+          "module": "firebase_core_release",
+          "version": {
+            "requires": "1.0"
+          }
+        },
+        {
+          "group": "io.flutter.plugins.firebase.crashlytics",
+          "module": "firebase_crashlytics_release",
+          "version": {
+            "requires": "1.0"
+          }
         }
       ],
       "files": [
         {
           "name": "flutter_release-1.0.aar",
           "url": "flutter_release-1.0.aar",
-          "size": 3825740,
-          "sha512": "dd65b01f1f7952b34c376337a3286a8d6f6d4c8024f8158da15196cc41340dcf3830a505e5d425b50a7318a9eefcf39dca73c3e95cef2cc2897a155a63e79849",
-          "sha256": "2774f6aea0380ced30c393d850be1138c2ae5b89df36266f009d4a004bdd4aed",
-          "sha1": "86a88960e881d82e2f05339fd22820ebffd3f32a",
-          "md5": "7cb87c030a51ff056f3989220b434d24"
+          "size": 3970365,
+          "sha512": "35be5d4fb6945c2cefda3455941bf55d672fb3ba45bdc5bfa45f5561e5681e827baf3ed225b40c3c73e8412e2d312072caa28034174d8435236549adb1ff7f88",
+          "sha256": "c4540558002102d94fe9988f4eb4837f13b011eab664b441279c97e84eab8897",
+          "sha1": "9aeaf82b2a0e4855c019e42c51c382efb4183e64",
+          "md5": "f424bac35fe8c7fc7a1a72ab32314ec2"
         }
       ]
     },
@@ -100,17 +121,38 @@
           "version": {
             "requires": "1.0.0-235db911ba279722f5e685f38b0ed30fa7e8570a"
           }
+        },
+        {
+          "group": "io.flutter.plugins.firebase.analytics",
+          "module": "firebase_analytics_release",
+          "version": {
+            "requires": "1.0"
+          }
+        },
+        {
+          "group": "io.flutter.plugins.firebase.core",
+          "module": "firebase_core_release",
+          "version": {
+            "requires": "1.0"
+          }
+        },
+        {
+          "group": "io.flutter.plugins.firebase.crashlytics",
+          "module": "firebase_crashlytics_release",
+          "version": {
+            "requires": "1.0"
+          }
         }
       ],
       "files": [
         {
           "name": "flutter_release-1.0.aar",
           "url": "flutter_release-1.0.aar",
-          "size": 3825740,
-          "sha512": "dd65b01f1f7952b34c376337a3286a8d6f6d4c8024f8158da15196cc41340dcf3830a505e5d425b50a7318a9eefcf39dca73c3e95cef2cc2897a155a63e79849",
-          "sha256": "2774f6aea0380ced30c393d850be1138c2ae5b89df36266f009d4a004bdd4aed",
-          "sha1": "86a88960e881d82e2f05339fd22820ebffd3f32a",
-          "md5": "7cb87c030a51ff056f3989220b434d24"
+          "size": 3970365,
+          "sha512": "35be5d4fb6945c2cefda3455941bf55d672fb3ba45bdc5bfa45f5561e5681e827baf3ed225b40c3c73e8412e2d312072caa28034174d8435236549adb1ff7f88",
+          "sha256": "c4540558002102d94fe9988f4eb4837f13b011eab664b441279c97e84eab8897",
+          "sha1": "9aeaf82b2a0e4855c019e42c51c382efb4183e64",
+          "md5": "f424bac35fe8c7fc7a1a72ab32314ec2"
         }
       ]
     }
