@@ -12,7 +12,7 @@ plugins {
 
 android {
     namespace 'com.mricoism.copycatbafbpkb'
-    compileSdk 35
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.mricoism.copycatbafbpkb"
@@ -32,6 +32,9 @@ android {
         profile {
             initWith debug
         }
+        debug {
+//            ext.enableCrashlytics = true
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -42,6 +45,44 @@ android {
     }
     buildFeatures {
         viewBinding = true
+//        buildConfig = true
+    }
+
+    // from source learn : https://rahul9650ray.medium.com/add-flavors-to-your-android-builds-8ce7010990a
+//    flavorDimensions "default"
+
+    flavorDimensions = ["app"]
+
+    productFlavors {
+        dev {
+            // from source learn : https://rahul9650ray.medium.com/add-flavors-to-your-android-builds-8ce7010990a
+//            applicationId "com.mricoism.copycatbafbpkb.dev"
+//            resValue "string", "app_name", "copycatbafbpkb-dev"
+//            ext.enableCrashlytics = false
+
+            dimension "app"
+            buildConfigField "String", "SERVER_URL", '"https://google.com"'
+        }
+
+        stg {
+            // from source learn : https://rahul9650ray.medium.com/add-flavors-to-your-android-builds-8ce7010990a
+//            applicationId "com.mricoism.copycatbafbpkb.stg"
+//            resValue "string", "app_name", "copycatbafbpkb-stg"
+//            ext.enableCrashlytics = false
+
+            dimension "app"
+            buildConfigField "String", "SERVER_URL", '"https://chatgpt.com"'
+        }
+
+        prod {
+            // form source learn : https://rahul9650ray.medium.com/add-flavors-to-your-android-builds-8ce7010990a
+//            applicationId "com.mricoism.copycatbafbpkb"
+//            resValue "string", "app_name", "copycatbafbpkb"
+//            ext.enableCrashlytics = false
+
+            dimension "app"
+            buildConfigField "String", "SERVER_URL", '"https://apple.com"'
+        }
     }
 }
 

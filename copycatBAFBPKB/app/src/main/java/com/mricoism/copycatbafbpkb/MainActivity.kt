@@ -6,9 +6,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.mricoism.copycatbafbpkb.databinding.ActivityMainBinding
 import io.flutter.embedding.android.FlutterActivity
+import com.mricoism.copycatbafbpkb.BuildConfig
 
 class MainActivity : AppCompatActivity() {
 
+    private val BASE_URL = BuildConfig.SERVER_URL
     lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
