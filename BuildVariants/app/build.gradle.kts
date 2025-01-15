@@ -18,11 +18,18 @@ android {
     }
 
     buildTypes {
+        debug {
+            applicationIdSuffix = ".dev"
+            // buildConfigField("String", "BASE_URL", "\"https://www.google.com\"") // buildTypes also can define buildConfigField
+            isMinifyEnabled = false
+            isShrinkResources = false
+            isDebuggable = true
+        }
         release {
             applicationIdSuffix = ".prod"
-            buildConfigField("String", "BASE_URL", "\"https://www.apple.com\"")
+            // buildConfigField("String", "BASE_URL", "\"https://www.apple.com\"") // buildTypes also can define buildConfigField
             isMinifyEnabled = true
-//            isShrinkResources = true
+            isShrinkResources = true
             isDebuggable = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -30,28 +37,36 @@ android {
             )
             signingConfig = signingConfigs.getByName("debug")
         }
-        debug {
-            applicationIdSuffix = ".dev"
-            buildConfigField("String", "BASE_URL", "\"https://www.google.com\"")
-            isMinifyEnabled = false
-//            isShrinkResources = false
-            isDebuggable = true
-
-
+        create("profile") {
+            initWith(getByName("debug")) // Optional: Copy debug settings
+            isDebuggable = true         // Enable debugging for profile build
         }
     }
+
+    flavorDimensions += "app"
     productFlavors {
-//        create("free") {
-//            dimension = "version"
-//            applicationId = "com.example.free"
-//            versionName = "1.0-free"
-//        }
-//
-//        create("paid") {
-//            dimension = "version"
-//            applicationId = "com.example.paid"
-//            versionName = "1.0-paid"
-//        }
+        create("production") {
+            dimension = "app"
+            applicationId = "com.example.prod"
+            versionName = "1.0"
+            buildConfigField("String", "BASE_URL", "\"https://www.apple.com\"")
+        }
+
+        create("beta") {
+            dimension = "app"
+            applicationId = "com.example.beta"
+            versionName = "1.0-beta"
+            buildConfigField("String", "BASE_URL", "\"https://www.google.com\"")
+        }
+
+        create("dev") {
+            dimension = "app"
+            applicationId = "com.example.dev"
+            versionName = "1.0-dev"
+            buildConfigField("String", "BASE_URL", "\"https://www.microsoft.com\"")
+        }
+
+
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
