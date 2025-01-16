@@ -40,6 +40,7 @@ android {
         create("profile") {
             initWith(getByName("debug")) // Optional: Copy debug settings
             isDebuggable = true         // Enable debugging for profile build
+            applicationIdSuffix = ".prof"
         }
     }
 
