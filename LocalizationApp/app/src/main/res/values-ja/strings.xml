@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ローカリゼーションApp</string>
+    <string name="custom_message">このアプリケーションは、言語のローカリゼーションがデバイス上で機能するかどうかをテストします。</string>
+</resources>

@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">LocalizationApp</string>
+    <string name="custom_message">This application tests if the language localization works on the device</string>
+</resources>
