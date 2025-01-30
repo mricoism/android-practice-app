@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">PreventRootDeviceApp</string>
+    <string name="message_rooted">This device is rooted. You can\'t use this app.</string>
+</resources>
