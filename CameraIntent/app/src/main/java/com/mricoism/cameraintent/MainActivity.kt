@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
-    private lateinit var imageUri: Uri
 
     private val ALLOWED_CAMERA_APPS = listOf(
         "com.android.camera",    // Default system camera
@@ -29,19 +28,15 @@ class MainActivity : AppCompatActivity() {
     )
 
     private val cameraLauncher = registerForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) { result ->
-        Log.d("HWS", "A 1 | ${result.resultCode} | ${Activity.RESULT_OK}")
         if (result.resultCode == Activity.RESULT_OK) {
-            Log.d("HWS", "A 2")
             // Handle the captured image
 //            val capturedImageUri = result.data?.data
-            val capturedImageUri = result.data?.extras!!["data"] as Bitmap?
-            Log.d("HWS", "A 3 | $capturedImageUri")
+//            val capturedImageUri = result.data?.extras!!["data"] as Bitmap?
+            val capturedImageUri = result.data?.extras?.get("data") as Bitmap?
             capturedImageUri?.let {
                 // Process the image (display, upload, etc.)
-                Log.d("HWS", "A 4 | $it")
                 binding.imageView.setImageBitmap(it)
 //                binding.imageView.setImageURI(it)
-                Log.d("HWS", "A 5")
             }
         }
     }
@@ -77,5 +72,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+//        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
+//            binding.imageView.setImageURI(photoUri) // Display the captured image
+//        }
     }
 }

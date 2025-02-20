@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "928136890515",
+    "project_id": "pushnotifapp-1b2f5",
+    "storage_bucket": "pushnotifapp-1b2f5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:928136890515:android:7b2f266a92e610ac572566",
+        "android_client_info": {
+          "package_name": "com.mricoism.pushnotifapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5jlUyNbMxzERKea4iXrBxv_PvOewqJ1E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
