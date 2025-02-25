@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.mricoism.pushnotifapp"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.mricoism.pushnotifapp"
@@ -71,11 +71,11 @@ dependencies {
 
     // Import the Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:33.9.0"))
+    // Add the dependency for the Firebase SDK for Google Analytics
+//    implementation("com.google.firebase:firebase-analytics")
 
     implementation("com.google.firebase:firebase-messaging")
 
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
-
-
 }
