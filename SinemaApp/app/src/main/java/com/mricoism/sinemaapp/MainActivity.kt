@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
             // TODO: Inform user that that your app will not show notifications.
         }
     }
+    private var token: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +44,14 @@ class MainActivity : AppCompatActivity() {
         askNotificationPermission()
 
         binding.button.setOnClickListener {
-            throw RuntimeException("Test Crash")
+//            throw RuntimeException("Test Crash")
+            CoroutineScope(Dispatchers.IO).launch {
+                val localToken = Firebase.messaging.token.await()
+//                Log.d("FCM Token", localToken)
+                CoroutineScope(Dispatchers.Main).launch {
+                    binding.textView.text = localToken
+                }
+            }
         }
         CoroutineScope(Dispatchers.IO).launch {
             val localToken = Firebase.messaging.token.await()

@@ -11,6 +11,15 @@ android {
     namespace = "com.mricoism.sinemaapp"
     compileSdk = 35
 
+    signingConfigs {
+        create("release") {
+            storeFile = file("/Users/code.id/Documents/learn/android/keystore/prod_keystore.jks")
+            storePassword = "12345678"
+            keyAlias = "key0"
+            keyPassword = "12345678"
+        }
+    }
+
     defaultConfig {
         applicationId = "com.mricoism.sinemaapp"
         minSdk = 24
@@ -22,14 +31,53 @@ android {
     }
 
     buildTypes {
-        release {
+        debug {
+            applicationIdSuffix = ".dev"
             isMinifyEnabled = false
+            isShrinkResources = false
+            isDebuggable = true
+        }
+        release {
+//            applicationIdSuffix = ".release" // Optional untuk menambahkan suffix pada prod
+            isMinifyEnabled = true
+            isShrinkResources = true
+            isDebuggable = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release") // Link signingConfig
+        }
+
+        create("profile") {
+            initWith(getByName("debug")) // Optional: Copy debug settings
+            applicationIdSuffix = ".profile"
+            isDebuggable = true // Enable debugging for profile build
         }
     }
+    flavorDimensions += "app"
+
+    productFlavors {
+        create("development") {
+            dimension = "app"
+            applicationId = "com.mricoism.sinemaapp"
+            versionName = "1.0"
+            buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/\"")
+        }
+        create("production") {
+            dimension = "app"
+            applicationId = "com.mricoism.sinemaapp"
+            versionName = "1.0-dev"
+            buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/\"")
+        }
+        create("beta") {
+            dimension = "app"
+            applicationId = "com.mricoism.sinemaapp"
+            versionName = "1.0-beta"
+            buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/\"")
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -40,7 +88,9 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
+
 }
 
 dependencies {

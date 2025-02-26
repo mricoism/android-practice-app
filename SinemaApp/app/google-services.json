@@ -23,6 +23,44 @@
           "other_platform_oauth_client": []
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:113974459406:android:dac6c2750eb3730ed6d05f",
+        "android_client_info": {
+          "package_name": "com.mricoism.sinemaapp.dev"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATZM1wOPCyHG-8FVqqLPgR4QErT5Jd44U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:113974459406:android:483e3c5b8754e4fed6d05f",
+        "android_client_info": {
+          "package_name": "com.mricoism.sinemaapp.prod"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATZM1wOPCyHG-8FVqqLPgR4QErT5Jd44U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
     }
   ],
   "configuration_version": "1"
